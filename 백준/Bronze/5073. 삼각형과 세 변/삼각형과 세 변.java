@@ -11,14 +11,12 @@ public class Main {
         while (true) {
             StringTokenizer st = new StringTokenizer(br.readLine());
 
-            int[] lines = {
-                    Integer.parseInt(st.nextToken()),
-                    Integer.parseInt(st.nextToken()),
-                    Integer.parseInt(st.nextToken())
-            };
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            int c = Integer.parseInt(st.nextToken());
 
-            int sum = Arrays.stream(lines).sum();
-            int max = Arrays.stream(lines).max().getAsInt();
+            int sum = a + b + c;
+            int max = Math.max(a, Math.max(b, c));
 
             if (sum == 0) {
                 break;
@@ -30,19 +28,19 @@ public class Main {
                 continue;
             }
 
-            bw.write(getShapeType(lines));
+            bw.write(getShapeType(a, b, c));
             bw.newLine();
         }
 
         bw.flush();
     }
 
-    public static String getShapeType(int[] arr) {
-        if (arr[0] != arr[1] && arr[1] != arr[2] && arr[2] != arr[0]) {
+    public static String getShapeType(int a, int b, int c) {
+        if (a != b && b != c && c != a) {
             return "Scalene";
         }
 
-        if (arr[0] == arr[1] && arr[1] == arr[2]){
+        if (a == b && b == c){
             return "Equilateral";
         }
 
