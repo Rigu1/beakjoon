@@ -8,26 +8,19 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        ArrayList<int[]> infos = new ArrayList<>();
+        int x = 0;
+        int y = 0;
 
         for (int i = 0; i < 3; i++) {
             String input = br.readLine();
             int[] parts = Arrays.stream(input.split(" ")).mapToInt(Integer::parseInt).toArray();
 
-            infos.add(parts);
+            x = parts[0] ^ x;
+            y = parts[1] ^ y;
         }
-
-        // 미지의 점은 이웃한 점의 연장선으로부터 수직으로 만난다.
-        int[] xCoords = infos.stream().mapToInt(arr -> arr[0]).toArray();
-        int[] yCoords = infos.stream().mapToInt(arr -> arr[1]).toArray();
-
-        int x = findUnique(xCoords);
-        int y = findUnique(yCoords);
 
         System.out.println(x + " " + y);
     }
 
-    public static int findUnique(int[] arr) {
-        return arr[0] ^ arr[1] ^ arr[2];
-    }
+
 }
