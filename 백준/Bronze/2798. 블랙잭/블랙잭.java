@@ -20,21 +20,31 @@ public class Main {
             numbers.add(Integer.parseInt(st.nextToken()));
         }
 
-        int result = m;
+        int result = findCombinations(n, m, numbers, 0, 0, 0);
 
-        for (int i = 0; i < n - 2; i++) {
-            for (int j = i + 1; j < n - 1; j++) {
-                for (int  k = j + 1; k < n; k++) {
-                    int temp = numbers.get(i) + numbers.get(j) + numbers.get(k);
+        bw.write(String.valueOf(result));
+        bw.flush();
+    }
 
-                    if (m - temp < result && temp <= m) {
-                        result = m - temp;  
-                    }
-                }
+    public static int findCombinations(int len, int target, ArrayList<Integer> numbers, int index, int count, int sum) {
+        if (sum > target) {
+            return 0;
+        }
+
+        if (count == 3) {
+            return sum;
+        }
+
+        int best = 0;
+
+        for (int i = index; i < len; i++) {
+            int resultFromChild = findCombinations(len, target, numbers, i + 1, count + 1, sum + numbers.get(i));
+
+            if (resultFromChild > best) {
+                best = resultFromChild;
             }
         }
 
-        bw.write(String.valueOf(m - result));
-        bw.flush();
+        return best;
     }
 }
