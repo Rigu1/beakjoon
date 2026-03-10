@@ -3,12 +3,13 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.StringTokenizer;
 
 public class Main {
     private static int[] counterAlphabet(String text) {
         int[] counter = new int[26];
-        for (char ch : text.toCharArray()) {
-            int index = ch - 'a';
+        for (int i = 0; i < text.length(); i++) {
+            int index = text.charAt(i) - 'a';
             counter[index] += 1;
         }
         return counter;
@@ -21,9 +22,9 @@ public class Main {
         int n = Integer.parseInt(bufferedReader.readLine());
 
         for (int i = 0; i < n; i++) {
-            String[] temp = bufferedReader.readLine().split(" ");
-            int[] firstCounter = counterAlphabet(temp[0]);
-            int[] secondCounter = counterAlphabet(temp[1]);
+            StringTokenizer stringTokenizer = new StringTokenizer(bufferedReader.readLine());
+            int[] firstCounter = counterAlphabet(stringTokenizer.nextToken());
+            int[] secondCounter = counterAlphabet(stringTokenizer.nextToken());
 
             boolean flag = false;
             for (int j = 0; j < 26; j++) {
