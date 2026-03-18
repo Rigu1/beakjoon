@@ -20,17 +20,14 @@ public class Main {
 
         int n = Integer.parseInt(br.readLine());
 
-        Map<String, Integer> extensions = new HashMap<>();
+        Map<String, Integer> extensions = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
         for (int i = 0; i < n; i++) {
             String extension = br.readLine().split("\\.")[1];
             extensions.merge(extension, 1, Integer::sum);
         }
 
-        List<String> names = new ArrayList<>(extensions.keySet());
-        names.sort(String::compareToIgnoreCase);
-
-        for (String name : names) {
+        for (String name : extensions.keySet()) {
             bw.write(name + " " + extensions.get(name));
             bw.newLine();
         }
